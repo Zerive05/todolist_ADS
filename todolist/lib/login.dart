@@ -14,13 +14,13 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future<void> login(String nama, String password) async {
+  Future<void> login(String username, String password) async {
     final url = Uri.parse("http://192.168.27.136/todolist_api/login.php"); // Ganti dengan alamat backend Anda
     try {
       final response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"nama": nama, "password": password}),
+        body: jsonEncode({"nama": username, "password": password}),
       );
 
       if (response.statusCode == 200) {
@@ -30,10 +30,10 @@ class _LoginPageState extends State<LoginPage> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(data["message"])),
           );
-          // Navigasi ke halaman Home
+          // Navigasi ke halaman Home, mengirimkan username yang berhasil login
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage(username: username)),
           );
         } else {
           // Login gagal
@@ -99,11 +99,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 onPressed: () {
-                  final nama = usernameController.text;
+                  final username = usernameController.text;  // Ganti 'nama' menjadi 'username'
                   final password = passwordController.text;
 
-                  if (nama.isNotEmpty && password.isNotEmpty) {
-                    login(nama, password);
+                  if (username.isNotEmpty && password.isNotEmpty) {
+                    login(username, password);  // Ganti 'nama' menjadi 'username'
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Please fill all fields")),
