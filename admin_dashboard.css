@@ -1,0 +1,307 @@
+@font-face {
+    font-family: 'pricedow';
+    src: url('../fonts/pricedow.ttf') format('truetype'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'Cybrpnuk2';
+    src: url('../fonts/Cybrpnuk2.ttf') format('truetype'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+@font-face {
+    font-family: 'Poppins-Black';
+    src: url('../fonts/Poppins-Black.woff2') format('woff2'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-family: "Inter", sans-serif;
+    background-color: #fff;
+}
+
+.wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 10px;
+    width: 60%;
+    max-width: 900px;
+}
+
+.wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("Screenshot_21-12-2024_64038_www.bing.com.jpeg");
+    background-size: cover;
+    filter: blur(3px);
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+@media (min-width:768px) {
+    .wrapper {
+        height: 50rem;
+        width: 25rem;
+        border-radius: 40px;
+        border: 10px solid #2e2e2e;
+    }
+}
+
+.header {
+    font-size: 48px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    color: rgb(255, 255, 255);
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #333;
+}
+
+.action-buttons a {
+    color: #00f;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0); 
+    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.modal-content {
+    background-color: #cacaca;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #ff0000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.modal-button.cancel {
+    background-color: #dc3545; 
+}
+
+.edit-user-title {
+    color: white;
+}
+
+.edit-user-form {
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-weight: bold;
+    color: white;
+}
+
+.form-input {
+    background-color: transparent;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    color: white;
+    border-radius: 5px;
+}
+
+.update-button {
+    background-color: transparent;
+    color: white;
+    padding: 10px 15px;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.update-button:hover {
+    background-color: white; 
+    color: black; 
+}
+
+.logout-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.floating-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 300px;
+}
+
+.edit-user-title {
+    margin: 0 0 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.update-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.update-button:hover {
+    background-color: #45a049;
+}
+
+.close-alert {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: red;
+    cursor: pointer;
+}
+
+.close-alert:hover {
+    color: darkred;
+}
+
+.logout-button {
+    display: inline-block;
+    padding: 10px 15px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+.logout-button:hover {
+    background-color: rgb(255, 255, 255); 
+    color: rgb(0, 0, 0); 
+}
