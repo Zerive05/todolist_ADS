@@ -56,10 +56,13 @@ $conn->close();
                     </svg>
                 </div>
                 <div class="welcome">
-                    <div class="content">
-                        <h1>Hello <?php echo $username; ?></h1>
-                        <p>Today you have <span id="total-tasks"><?php echo $totalTasks; ?></span> tasks</p>
-                    </div>
+                <div class="content">
+                    <h1>Hello <?php echo $username; ?></h1>
+                    <p>You have <span id="total-tasks"><?php echo $totalTasks; ?></span> tasks</p>
+                    <p>Completed: <span id="total-completed">0</span></p>
+                    <p id="pending-container">Pending: <span id="total-pending">0</span></p>
+                <div class="motivational-message" style="display: none; color: #2e2e2e;"></div>
+                </div>
                     <div class="img">
                         <div class="backdrop"></div>
                         <img src="images/boy.png" alt="" />

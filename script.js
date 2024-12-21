@@ -9,29 +9,6 @@ let categories = [
   { title: "Keuangan", img: "saving.png" },
 ];
 
-let tasks = [
-  { id: 1, task: "Pergi ke pasar", category: "belanja", completed: false },
-  { id: 2, task: "Membaca buku", category: "Pribadi", completed: false },
-  { id: 3, task: "menyapu", category: "Kerjaan", completed: false },
-  { id: 4, task: "Coding", category: "Tugas", completed: false },
-  { id: 5, task: "Jalan 30 menit", category: "Kesehatan", completed: false },
-  { id: 6, task: "Workout", category: "Fitness", completed: false },
-  { id: 7, task: "Menonton edukasi", category: "Edukasi", completed: false },
-  { id: 8, task: "Review budget bulanan", category: "Keuangan", completed: false },
-  { id: 9, task: "Beli bahan makanan", category: "Belanja", completed: false },
-  { id: 10, task: "Menulis", category: "Pribadi", completed: false },
-  { id: 11, task: "Mengirim tugas kerja", category: "Kerjaan", completed: false },
-  { id: 12, task: "belajar", category: "Tugas", completed: false },
-  { id: 13, task: "Coba resep baru", category: "Kesehatan", completed: false },
-  { id: 14, task: "Mengikuti yoga", category: "Fitness", completed: false },
-  { id: 15, task: "membaca artikel terbaru", category: "Edukasi", completed: false },
-  { id: 16, task: "mengatur pembayaran otomatis", category: "Keuangan", completed: false },
-  { id: 17, task: "membeli baju baru", category: "Belanja", completed: false },
-  { id: 18, task: "meditasi 10 menit", category: "Pribadi", completed: false },
-  { id: 19, task: "Prepare untuk meeting minggu depan", category: "Kerjaan", completed: false },
-  { id: 20, task: "Mengerjakan Pr", category: "Tugas", completed: false },
-];
-
 const saveLocal = () => {
   localStorage.setItem("tasks", JSON.stringify(tasks));
 };
@@ -51,8 +28,39 @@ const updateTotals = () => {
   const categoryTasks = tasks.filter(
     (task) => task.category.toLowerCase() === selectedCategory.title.toLowerCase()
   );
+
   numTasks.innerHTML = `${categoryTasks.length} Tasks`;
-  totalTasks.innerHTML = tasks.length;
+
+  const completedTasks = categoryTasks.filter(task => task.completed).length;
+  const pendingTasks = categoryTasks.length - completedTasks;
+
+  document.getElementById("total-completed").innerHTML = completedTasks;
+  document.getElementById("total-pending").innerHTML = pendingTasks;
+
+  const totalCompletedTasks = tasks.filter(task => task.completed).length;
+  const totalPendingTasks = tasks.length - totalCompletedTasks;
+
+  document.getElementById("total-completed").innerHTML = totalCompletedTasks;
+
+  const totalPendingElement = document.getElementById("total-pending");
+  const pendingContainer = document.getElementById("pending-container");
+  const motivationalMessage = document.querySelector(".motivational-message");
+
+  if (totalPendingTasks === 0 && tasks.length > 0) {
+    motivationalMessage.innerHTML = "Kinerja kamu bagus, lakukan task lebih banyak lagi!";
+    motivationalMessage.style.display = "block";
+    pendingContainer.style.display = "none";
+  } else {
+    totalPendingElement.innerHTML = totalPendingTasks;
+    totalPendingElement.style.display = "inline";
+    motivationalMessage.style.display = "none";
+    pendingContainer.style.display = "block";
+  }
+
+  if (totalPendingTasks === 0 && totalCompletedTasks === 0) {
+    pendingContainer.style.display = "none";
+    motivationalMessage.style.display = "none";
+  }
 };
 
 const renderCategories = () => {
@@ -98,9 +106,12 @@ const renderTasks = () => {
   const categoryTasks = tasks.filter(
     (task) => task.category.toLowerCase() === selectedCategory.title.toLowerCase()
   );
+
   if (categoryTasks.length === 0) {
-    tasksContainer.innerHTML = `<p class="no-tasks">No tasks added for this category</p>`;
+    tasksContainer.innerHTML = `<p class=" no-tasks">No tasks added for this category</p>`;
   } else {
+    let allCompleted = true;
+
     categoryTasks.forEach((task) => {
       const div = document.createElement("div");
       div.classList.add("task-wrapper");
@@ -113,9 +124,13 @@ const renderTasks = () => {
       checkbox.checked = task.completed;
       checkbox.addEventListener("change", () => {
         const index = tasks.findIndex((t) => t.id === task.id);
-        tasks[index].completed = !tasks[index].completed;
-        saveLocal();
+        if (index !== -1) {
+          tasks[index].completed = !tasks[index].completed;
+          saveLocal();
+          updateTotals();
+        }
       });
+
       div.innerHTML = `
         <div class="delete">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -141,7 +156,12 @@ const renderTasks = () => {
         tasks.splice(index, 1);
         saveLocal();
         renderTasks();
+        updateTotals();
       });
+
+      if (!task.completed) {
+        allCompleted = false;
+      }
     });
 
     renderCategories();
@@ -152,7 +172,7 @@ const renderTasks = () => {
 const toggleAddTaskForm = () => {
   addTaskWrapper.classList.toggle("active");
   blackBackdrop.classList.toggle("active");
-  addTaskBtn.classList.toggle(" active");
+  addTaskBtn.classList.toggle("active");
 };
 
 const addTask = (e) => {
@@ -174,6 +194,7 @@ const addTask = (e) => {
     saveLocal();
     toggleAddTaskForm();
     renderTasks();
+    updateTotals();
   }
 };
 
