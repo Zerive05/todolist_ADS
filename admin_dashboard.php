@@ -144,7 +144,7 @@ $stmt->close();
         <?php endif; ?>
         
         <div class="logout-container">
-            <a href="login.php" class="logout-button">Logout</a>
+            <a href="index.php" class="logout-button">Logout</a>
         </div>
     </div>
     
