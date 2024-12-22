@@ -1,10 +1,10 @@
 <?php
-session_start(); 
+session_start();
 
 $servername = "localhost";
 $username = "root";
-$password = ""; 
-$dbname = "todo_list"; 
+$password = "";
+$dbname = "todo_list";
 
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -25,13 +25,14 @@ if ($result) {
 
 
 $username = isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Guest';
-$totalTasks = count($tasks); 
+$totalTasks = count($tasks);
 
 $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -45,15 +46,23 @@ $conn->close();
     <link rel="stylesheet" href="style.css" />
     <title>TO DO LIST</title>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="screen-backdrop"></div>
         <div class="home-screen screen">
             <div class="head-wrapper">
-                <div class="menu-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
-                    </svg>
+                <div class="btn-atas">
+                    <div class="menu-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                        </svg>
+                    </div>
+                    <div class="notif-btn">
+                        <a href="notif.php">
+                            <img src="images/notification-icon.png" alt="notif" width="32" height="32">
+                        </a>
+                    </div>
                 </div>
                 <div class="welcome">
                 <div class="content">
@@ -98,7 +107,7 @@ $conn->close();
                     </svg>
                 </div>
                 <div class="options">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class ="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
                     </svg>
                 </div>
@@ -156,4 +165,5 @@ $conn->close();
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
