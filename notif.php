@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 // Ambil jadwal notifikasi dari database
 $current_time = date("Y-m-d H:i:s");
 $next_hour = date("Y-m-d H:i:s", strtotime('+1 hour'));
-$sql = "SELECT * FROM tasks WHERE schedule_time BETWEEN '$current_time' AND '$next_hour'";
+$sql = "SELECT * FROM tasks WHERE completed='1'";
 $result = $conn->query($sql);
 
 $conn->close();
@@ -56,7 +56,9 @@ $conn->close();
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <div class="notification-item">
                                 <div class="content">
-                                    <h1><?php echo htmlspecialchars($row['task_name']); ?></h1>
+                                    <h1><?php echo htmlspecialchars($row['task']); ?></h1>
+                                    <p><?php echo htmlspecialchars($row['category']); ?></p>
+                                    <p><?php echo htmlspecialchars($row['completed']); ?></p>
                                     <p><?php echo htmlspecialchars($row['schedule_time']); ?></p>
                                 </div>
                             </div>
